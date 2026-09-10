@@ -619,6 +619,24 @@
     }
   }
 
+
+  /* ===== 메인 슬라이드에서는 목차 숨김 / 본문부터 표시 ===== */
+  @media (min-width:1081px){
+    .toc{
+      opacity:0;
+      visibility:hidden;
+      pointer-events:none;
+      transform:translateX(-18px);
+      transition:opacity .28s ease, transform .28s ease, visibility .28s ease;
+    }
+    .toc.toc-visible{
+      opacity:1;
+      visibility:visible;
+      pointer-events:auto;
+      transform:translateX(0);
+    }
+  }
+
 </style>
 </head>
 <body>
@@ -1293,6 +1311,27 @@ const lectureSlides = [
     tocLinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+current));
   }
   window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+
+
+  const desktopToc = document.querySelector('.toc');
+  const heroSection = document.querySelector('.hero');
+
+  function toggleDesktopToc(){
+    if(!desktopToc || !heroSection) return;
+    if(window.innerWidth <= 1080){
+      desktopToc.classList.remove('toc-visible');
+      return;
+    }
+
+    const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
+    const showToc = window.scrollY >= (heroBottom - 40);
+    desktopToc.classList.toggle('toc-visible', showToc);
+  }
+
+  window.addEventListener('scroll', toggleDesktopToc, {passive:true});
+  window.addEventListener('resize', toggleDesktopToc);
+  toggleDesktopToc();
+
 
   topBtn.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
 
