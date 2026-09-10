@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#102653">
+<title>평택 세교중학교 AI활용 콘텐츠창작 | 내가 만드는 북튜브</title>
+<meta name="description" content="경기도교육청평택도서관 X AI콘텐츠마케팅연구소 유쌤클래스와 함께하는 평택 세교중학교 AI활용 콘텐츠창작 수업 페이지">
+<style>
+  :root{
+    --navy:#102653; --navy2:#173e76; --blue:#2979ff; --cyan:#18b8d7;
+    --yellow:#ffd84d; --gold:#d3ad52; --ink:#17213a; --muted:#5f6b7d;
+    --bg:#f5f8ff; --card:#ffffff; --line:#dce4f0; --red:#ef3e45;
+    --green:#15a777; --purple:#7757d8; --shadow:0 16px 40px rgba(16,38,83,.10);
+    --radius:24px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth; scroll-padding-top:90px}
+  body{
+    margin:0; color:var(--ink);
+    font-family:Pretendard,"Noto Sans KR","Malgun Gothic",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    background:
+      radial-gradient(circle at 8% 12%, rgba(41,121,255,.08), transparent 30%),
+      radial-gradient(circle at 90% 8%, rgba(255,216,77,.12), transparent 26%),
+      var(--bg);
+    line-height:1.75;
+  }
+  a{color:inherit}
+  button{font:inherit}
+  .progress{position:fixed;left:0;top:0;width:0;height:5px;background:linear-gradient(90deg,var(--yellow),var(--cyan),var(--blue));z-index:9999}
+  .hero{
+    position:relative;overflow:hidden;min-height:620px;
+    background:linear-gradient(135deg,#081b42 0%,#102653 48%,#164b8d 100%);
+    color:#fff;display:flex;align-items:center;
+  }
+  .hero:before,.hero:after{content:"";position:absolute;border-radius:50%;filter:blur(2px);opacity:.65}
+  .hero:before{width:420px;height:420px;background:rgba(24,184,215,.16);right:-110px;top:-120px;animation:float 8s ease-in-out infinite}
+  .hero:after{width:310px;height:310px;background:rgba(255,216,77,.12);left:-90px;bottom:-120px;animation:float 10s ease-in-out infinite reverse}
+  @keyframes float{50%{transform:translateY(25px) translateX(-15px) scale(1.05)}}
+  .hero-grid{
+    position:absolute;inset:0;opacity:.10;
+    background-image:linear-gradient(rgba(255,255,255,.4) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.4) 1px,transparent 1px);
+    background-size:42px 42px;
+    mask-image:linear-gradient(to bottom,black,transparent 92%);
+  }
+  .hero-inner{position:relative;z-index:2;width:min(1220px,92%);margin:auto;padding:92px 0 78px}
+  .eyebrow{display:inline-flex;gap:8px;align-items:center;padding:9px 14px;border:1px solid rgba(255,255,255,.22);border-radius:999px;background:rgba(255,255,255,.08);font-weight:800;font-size:14px;backdrop-filter:blur(8px)}
+  .eyebrow .dot{width:9px;height:9px;border-radius:50%;background:var(--yellow);box-shadow:0 0 0 6px rgba(255,216,77,.12)}
+  h1{font-size:clamp(38px,6vw,76px);line-height:1.12;margin:25px 0 20px;letter-spacing:-.055em;max-width:1100px}
+  h1 .accent{color:var(--yellow);position:relative;display:inline-block}
+  h1 .accent:after{content:"";position:absolute;left:0;right:0;height:10px;bottom:4px;background:rgba(255,216,77,.18);transform:skewX(-18deg)}
+  .hero-sub{font-size:clamp(18px,2.2vw,25px);color:#dbe8ff;max-width:850px;margin:0 0 28px;font-weight:650}
+  .hero-meta{display:flex;flex-wrap:wrap;gap:10px}
+  .hero-pill{padding:11px 15px;border-radius:14px;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.17);font-weight:750}
+  .scroll-cue{margin-top:34px;display:inline-flex;align-items:center;gap:9px;color:#cfe0ff;font-size:14px;animation:bob 1.8s infinite}
+  @keyframes bob{50%{transform:translateY(6px)}}
+
+  .mobile-toc{display:none;position:sticky;top:0;z-index:120;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding:10px 4%}
+  .mobile-toc button{width:100%;border:0;border-radius:13px;background:var(--navy);color:white;padding:13px 15px;font-weight:900;text-align:left;display:flex;justify-content:space-between}
+  .mobile-menu{display:none;max-height:60vh;overflow:auto;padding:8px 0}
+  .mobile-menu.open{display:block}
+  .mobile-menu a{display:block;text-decoration:none;padding:11px 13px;margin:3px 0;border-radius:10px;font-weight:750;color:#31405d}
+  .mobile-menu a:hover{background:#eef4ff;color:var(--blue)}
+
+  .layout{width:min(1380px,96%);margin:0 auto;display:grid;grid-template-columns:250px minmax(0,1fr);gap:34px;align-items:start;padding:50px 0 90px}
+  .toc{
+    position:sticky;top:22px;max-height:calc(100vh - 44px);overflow:auto;background:#fff;border:1px solid var(--line);border-radius:22px;padding:18px;box-shadow:0 12px 32px rgba(16,38,83,.07)
+  }
+  .toc-title{font-size:18px;font-weight:950;color:var(--navy);margin:0 0 10px;display:flex;align-items:center;gap:8px}
+  .toc small{display:block;color:#79859a;margin-bottom:12px}
+  .toc a{display:block;text-decoration:none;padding:9px 10px;border-radius:10px;font-size:14px;font-weight:750;color:#526079;border-left:3px solid transparent}
+  .toc a:hover,.toc a.active{background:#eef5ff;color:var(--blue);border-left-color:var(--yellow)}
+  main{min-width:0}
+  section{margin-bottom:34px}
+  .section-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:clamp(22px,3vw,38px);box-shadow:var(--shadow)}
+  .kicker{font-weight:950;color:var(--blue);font-size:14px;letter-spacing:.02em;text-transform:uppercase}
+  h2{font-size:clamp(27px,3vw,40px);line-height:1.25;margin:8px 0 13px;letter-spacing:-.04em;color:var(--navy)}
+  h3{font-size:clamp(21px,2vw,29px);line-height:1.35;margin:26px 0 10px;color:#18345e;letter-spacing:-.025em}
+  h4{font-size:18px;margin:20px 0 8px;color:#213b65}
+  p{margin:8px 0 14px}
+  .lead{font-size:18px;color:#43506a;font-weight:650}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+  .mini-card{border:1px solid var(--line);border-radius:18px;padding:20px;background:linear-gradient(180deg,#fff,#f9fbff)}
+  .mini-card .num{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:10px;background:var(--navy);color:#fff;font-weight:950;margin-bottom:10px}
+  .mini-card strong{display:block;font-size:18px;color:var(--navy)}
+  .date{font-weight:900;color:var(--blue);font-size:14px;margin-top:4px}
+  .timeline{display:grid;gap:13px;margin-top:16px}
+  .step{display:grid;grid-template-columns:52px 1fr;gap:14px;align-items:start;padding:17px;border:1px solid var(--line);border-radius:16px;background:#fbfdff}
+  .step-no{width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,var(--blue),var(--cyan));color:#fff;display:grid;place-items:center;font-weight:950}
+  .step strong{font-size:17px;color:var(--navy)}
+  .tag{display:inline-flex;padding:5px 9px;border-radius:999px;font-size:12px;font-weight:900;background:#eef5ff;color:var(--blue);margin:3px 4px 3px 0}
+  .tip{border-left:5px solid var(--yellow);background:#fffbea;border-radius:12px;padding:14px 16px;margin:15px 0;color:#5b4a0a}
+  .safety{border-left-color:var(--red);background:#fff1f2;color:#6f3034}
+  .source-note{border-left:5px solid var(--cyan);background:#eefbff;border-radius:12px;padding:14px 16px;margin:16px 0;color:#285164}
+
+  .prompt-box{border:1px solid #ccd8ea;border-radius:18px;overflow:hidden;margin:16px 0 22px;background:#fff}
+  .prompt-head{display:flex;gap:12px;justify-content:space-between;align-items:center;background:linear-gradient(90deg,#102653,#17447e);color:#fff;padding:13px 15px}
+  .copy-label{display:flex;align-items:center;gap:8px;font-weight:950;font-size:15px}
+  .arrow{color:#ff454d;font-size:24px;line-height:1;filter:drop-shadow(0 2px 2px rgba(0,0,0,.18))}
+  .copy-btn{
+    border:0;cursor:pointer;padding:10px 15px;border-radius:12px;font-weight:950;color:#11203e;
+    background:linear-gradient(135deg,#ffe36f,#ffc928);box-shadow:0 6px 16px rgba(255,200,40,.25);
+    transition:.2s transform,.2s box-shadow;
+  }
+  .copy-btn:hover{transform:translateY(-2px);box-shadow:0 10px 20px rgba(255,200,40,.32)}
+  .copy-btn.copied{background:#74e1b7}
+  pre.prompt{margin:0;padding:18px;white-space:pre-wrap;word-break:keep-all;overflow-wrap:anywhere;background:#f8faff;color:#24324c;font-family:"Malgun Gothic",sans-serif;font-size:15px;line-height:1.8}
+  .example{padding:16px 18px;background:#fff9e6;border-top:1px dashed #e0c76f}
+  .example strong{color:#765c07}
+  .example code{font-family:"Malgun Gothic",sans-serif;font-size:14px;color:#443b20}
+  .pillrow{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 4px}
+  .goal{background:linear-gradient(135deg,#edf5ff,#fff8dd);border:1px solid #d7e3f2;border-radius:18px;padding:19px;margin:16px 0}
+  .goal b{color:var(--navy)}
+  .session-banner{display:flex;align-items:center;gap:16px;padding:18px;border-radius:20px;background:linear-gradient(135deg,#edf5ff,#f8fbff);border:1px solid #d6e4f5;margin:14px 0 24px}
+  .session-icon{width:58px;height:58px;display:grid;place-items:center;border-radius:18px;background:#fff;font-size:29px;box-shadow:0 8px 18px rgba(16,38,83,.10)}
+  .session-banner strong{font-size:20px;color:var(--navy)}
+  .checklist{display:grid;gap:8px;margin:12px 0}
+  .check{padding:11px 13px;border-radius:12px;background:#f7faff;border:1px solid #e1e8f3}
+  .check:before{content:"✓";display:inline-grid;place-items:center;width:23px;height:23px;margin-right:8px;border-radius:50%;background:#dff7ee;color:#0a8a62;font-weight:950}
+
+  .ai-levels{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+  .level{padding:15px 12px;border-radius:15px;border:1px solid var(--line);background:#fbfdff;text-align:center}
+  .level b{display:block;color:var(--navy);font-size:15px}.level span{font-size:12px;color:#68758b}
+  .level.now{background:#eef5ff;border-color:#91b8ff;box-shadow:inset 0 0 0 2px rgba(41,121,255,.08)}
+  .level.future{background:#fff9e5}
+  table{width:100%;border-collapse:separate;border-spacing:0;overflow:hidden;border:1px solid var(--line);border-radius:16px;background:#fff}
+  th,td{padding:13px 14px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+  th{background:#eff5ff;color:var(--navy);font-weight:950}
+  tr:last-child td{border-bottom:0}
+
+  .teacher-wrap{display:flex;justify-content:center}
+  .teacher-card{font-family:Arial,'Malgun Gothic';color:#17213a;max-width:620px;width:100%;border:1px solid #cbd2de;border-radius:16px;overflow:hidden;background:#fff;box-shadow:var(--shadow)}
+  .teacher-card .goldbar{height:6px;background:#d3ad52}
+  .teacher-head{padding:18px;background:#102653}
+  .teacher-head table{border:0;background:transparent}
+  .teacher-head td{border:0;padding:0}
+  .teacher-head img.profile{width:90px;height:90px;border:4px solid #e3bd61;border-radius:50%;object-fit:cover}
+  .teacher-body{padding:12px 18px 4px}
+  .teacher-area{padding:9px 11px;background:#f3f6fb;border-left:4px solid #d3ad52;font-size:13px;line-height:1.6;border-radius:0 8px 8px 0;margin-bottom:8px}
+  .teacher-area.blue{border-left-color:#4771a9}
+  .teacher-contact{padding:7px 18px;font-size:13px;line-height:1.8}
+  .teacher-social{padding:4px 18px 16px}
+  .teacher-social a{display:inline-block;margin-right:6px}
+  .teacher-social img{width:27px;height:27px;border-radius:5px}
+
+  .footer{padding:35px 5%;background:#0b1d40;color:#cfddf6;text-align:center}
+  .footer strong{color:#fff}
+  .top-btn{
+    position:fixed;right:22px;bottom:22px;z-index:300;display:none;border:0;border-radius:50%;
+    width:58px;height:58px;background:linear-gradient(135deg,var(--yellow),#ffba24);color:#132443;
+    font-weight:950;box-shadow:0 12px 25px rgba(23,37,65,.25);cursor:pointer
+  }
+  .top-btn.show{display:block}
+  .toast{
+    position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(20px);
+    opacity:0;pointer-events:none;background:#102653;color:#fff;padding:12px 18px;border-radius:999px;font-weight:850;z-index:500;transition:.25s;
+    box-shadow:0 8px 30px rgba(0,0,0,.2)
+  }
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+  @media(max-width:1060px){
+    .layout{grid-template-columns:1fr;width:min(960px,92%);padding-top:28px}
+    .toc{display:none}.mobile-toc{display:block}
+    .grid3{grid-template-columns:1fr}
+    .ai-levels{grid-template-columns:repeat(3,1fr)}
+  }
+  @media(max-width:720px){
+    .hero{min-height:550px}.hero-inner{padding:72px 0 58px}
+    .hero-meta{display:grid;grid-template-columns:1fr 1fr}
+    .hero-pill{font-size:13px;padding:9px 10px}
+    .layout{width:94%;gap:20px}
+    .section-card{border-radius:19px;padding:20px}
+    .grid2{grid-template-columns:1fr}
+    .ai-levels{grid-template-columns:1fr}
+    .step{grid-template-columns:42px 1fr;padding:14px;gap:10px}.step-no{width:38px;height:38px}
+    .prompt-head{align-items:flex-start}.copy-label{font-size:13px}.copy-btn{padding:9px 11px;font-size:13px}
+    pre.prompt{font-size:14px;padding:15px;line-height:1.75}
+    table{display:block;overflow-x:auto;white-space:normal}
+    th,td{min-width:120px}
+    .teacher-head img.profile{width:78px;height:78px}
+    .top-btn{width:52px;height:52px;right:14px;bottom:14px}
+  }
+  @media(max-width:460px){
+    h1{font-size:38px}.hero-meta{grid-template-columns:1fr}
+    .prompt-head{flex-direction:column}.copy-btn{width:100%}
+  }
+  @media(prefers-reduced-motion:reduce){
+    *{scroll-behavior:auto!important;animation:none!important;transition:none!important}
+  }
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+
+<header class="hero" id="top">
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="eyebrow"><span class="dot"></span> 2026 평택 세교중학교 미디어창작 교육 · 중학생 18명</div>
+    <h1>경기도교육청평택도서관 X<br>AI콘텐츠마케팅연구소 유쌤클래스와 함께하는<br><span class="accent">평택 세교중학교 AI활용 콘텐츠창작</span></h1>
+    <p class="hero-sub">읽은 책 한 권이 <b>책표지 → 시와 시화 → 6장면 북튜브 영상</b>으로 변신합니다. AI에게 질문하고, 직접 만들고, 친구들과 발표해 봅니다.</p>
+    <div class="hero-meta">
+      <div class="hero-pill">📅 9/10 · 10/8 · 10/22</div>
+      <div class="hero-pill">⏰ 13:50–15:30 (100분)</div>
+      <div class="hero-pill">🎬 총 3회 실습형 수업</div>
+      <div class="hero-pill">👥 중학생 18명</div>
+    </div>
+    <div class="scroll-cue">↓ 아래로 내려 오늘의 미션을 확인해 보세요</div>
+  </div>
+</header>
+
+<nav class="mobile-toc" aria-label="모바일 간단목차">
+  <button id="mobileTocBtn" aria-expanded="false">☰ 간단목차 <span>▼</span></button>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#overview">수업 한눈에 보기</a>
+    <a href="#ai-basics">AI 기초와 5단계</a>
+    <a href="#day1">1회차 · 책표지 디자인</a>
+    <a href="#day2">2회차 · 시와 시화</a>
+    <a href="#day3">3회차 · 북튜브</a>
+    <a href="#teacher">강사 소개</a>
+    <a href="#rules">AI 사용 약속</a>
+  </div>
+</nav>
+
+<div class="layout">
+  <aside class="toc" aria-label="간단목차">
+    <div class="toc-title">🧭 간단목차</div>
+    <small>클릭하면 바로 이동해요.</small>
+    <a href="#overview">01 수업 한눈에 보기</a>
+    <a href="#ai-basics">02 AI 기초와 5단계</a>
+    <a href="#day1">03 1회차 · 책표지</a>
+    <a href="#day2">04 2회차 · 시와 시화</a>
+    <a href="#day3">05 3회차 · 북튜브</a>
+    <a href="#teacher">06 김유성 강사 소개</a>
+    <a href="#rules">07 AI 사용 약속</a>
+  </aside>
+
+  <main>
+    <section id="overview" class="section-card">
+      <div class="kicker">COURSE MAP</div>
+      <h2>3번 만나서, 3개의 작품을 완성해요</h2>
+      <p class="lead">AI를 그냥 구경하는 수업이 아니라, <b>내 생각을 프롬프트로 표현하고 직접 결과물을 만드는 창작 수업</b>입니다.</p>
+      <div class="grid3">
+        <div class="mini-card"><span class="num">1</span><strong>책표지 디자인</strong><div class="date">2026.09.10</div><p>좋은 프롬프트를 발견하고, 내 감정과 해석을 더해 새 표지를 디자인합니다.</p></div>
+        <div class="mini-card"><span class="num">2</span><strong>시 + 시화 이미지</strong><div class="date">2026.10.08</div><p>AI와 대화하며 시를 다듬고, 한 편의 시를 한 장의 이미지로 표현합니다.</p></div>
+        <div class="mini-card"><span class="num">3</span><strong>북큐레이션 북튜브</strong><div class="date">2026.10.22</div><p>책을 6개 장면으로 기획하고 이미지와 나레이션을 합쳐 영상으로 완성합니다.</p></div>
+      </div>
+      <div class="goal"><b>🎯 최종 미션</b><br>“AI가 대신 만들어 준 것”이 아니라, <b>내가 책을 읽고 느낀 생각을 AI와 함께 더 잘 표현한 콘텐츠</b>를 만드는 것이 목표입니다.</div>
+    </section>
+
+    <section id="ai-basics" class="section-card">
+      <div class="kicker">AI START</div>
+      <h2>AI는 지금 어디까지 왔을까?</h2>
+      <p class="lead">2026년의 AI는 글뿐 아니라 이미지·영상·소리를 만들고, 여러 단계를 이어서 작업하는 <b>AI 에이전트</b> 능력도 빠르게 발전하고 있습니다. 하지만 여전히 틀릴 수 있고, 현실 세계의 복잡한 일에는 한계가 있습니다.</p>
+      <div class="source-note">📌 2026 Stanford AI Index는 최신 AI 모델의 과학·수학·멀티모달·코딩 능력과 에이전트 성능이 크게 향상됐지만, 특정 간단한 문제나 실제 환경에서는 여전히 실패가 남아 있는 ‘들쭉날쭉한 능력’을 강조합니다.</div>
+      <h3>수업에서 쉽게 이해하는 AI 기술 5단계</h3>
+      <p>※ 아래 5단계는 학생 이해를 위한 <b>수업용 학습 프레임</b>입니다. 전 세계가 하나로 합의한 공식 등급표가 아닙니다.</p>
+      <div class="ai-levels">
+        <div class="level"><b>1단계 · 인식</b><span>사진·소리·글에서 특징 찾기</span></div>
+        <div class="level"><b>2단계 · 생성</b><span>글·이미지·영상·음악 만들기</span></div>
+        <div class="level now"><b>3단계 · 추론·멀티모달</b><span>여러 정보를 함께 이해하고 문제 풀기</span></div>
+        <div class="level now"><b>4단계 · 에이전트</b><span>여러 단계를 계획하고 도구를 사용해 작업하기</span></div>
+        <div class="level future"><b>5단계 · 더 일반적인 AI</b><span>폭넓은 일을 사람처럼 유연하게 수행하는 미래 연구</span></div>
+      </div>
+      <div class="grid2">
+        <div class="mini-card"><strong>1년 뒤</strong><p>학교·업무·창작에서 AI와 함께 일하는 방식이 더 자연스러워지고, 이미지·영상 제작 속도도 더 빨라질 가능성이 큽니다.</p></div>
+        <div class="mini-card"><strong>5년·10년 뒤</strong><p>정답을 외우는 힘만큼 <b>좋은 질문, 판단, 창의성, 협업, 책임</b>이 더 중요해질 수 있습니다. 미래는 확정된 예언이 아니라 우리가 함께 만들어 갑니다.</p></div>
+      </div>
+      <h3>생성형 AI 4가지</h3>
+      <div class="pillrow"><span class="tag">✍️ 글쓰기 생성</span><span class="tag">🖼️ 이미지 생성</span><span class="tag">🎬 영상 생성</span><span class="tag">🎵 소리·음악 생성</span></div>
+      <div class="tip"><b>프롬프트 잘 쓰는 공식</b> = 역할 + 목표 + 내가 가진 자료 + 꼭 지킬 조건 + 원하는 결과 형식 + 수정 요청. 한 번에 완벽하게 쓰기보다 AI와 대화하면서 고치면 더 좋아집니다.</div>
+    </section>
+
+    <section id="day1" class="section-card">
+      <div class="kicker">DAY 01 · 2026.09.10</div>
+      <h2>첫째 날 · AI기초 + 나만의 책표지 디자인</h2>
+      <div class="session-banner"><div class="session-icon">📘</div><div><strong>오늘의 작품: 내가 다시 해석한 책표지 1장</strong><br><span>원래 표지의 디자인 원리를 발견하고 → 내 느낌을 더해 → 새로운 프롬프트로 재설계합니다.</span></div></div>
+
+      <h3>실습 순서</h3>
+      <div class="timeline">
+        <div class="step"><div class="step-no">1</div><div><strong>책 표지 이미지 준비</strong><br>내가 읽은 책을 검색해 표지를 저장합니다. 수업 분석용으로만 활용하고, 완성물을 공개할 때는 원본을 그대로 복제하지 않습니다.</div></div>
+        <div class="step"><div class="step-no">2</div><div><strong>표지 속 ‘디자인 비밀’ 발견하기</strong><br>책 표지를 ChatGPT 또는 Gemini에 첨부하고, 비슷한 분위기를 만드는 데 필요한 디자인 요소와 프롬프트 구조를 분석합니다.</div></div>
+        <div class="step"><div class="step-no">3</div><div><strong>분석 프롬프트 저장</strong><br>AI가 알려준 프롬프트를 메모장 또는 수업 문서에 저장합니다.</div></div>
+        <div class="step"><div class="step-no">4</div><div><strong>내 느낌으로 다시 설계</strong><br>책을 읽고 느낀 감정·단어·장면·주인공의 모습을 넣어 ‘나만의 표지’ 프롬프트로 바꿉니다.</div></div>
+        <div class="step"><div class="step-no">5</div><div><strong>이미지 생성 + 비교</strong><br>최종 프롬프트로 이미지를 만들고, 원래 표지와 무엇이 달라졌는지 이야기합니다.</div></div>
+      </div>
+
+      <h3>2단계 실습 프롬프트 · 책표지 디자인 분석</h3>
+      <div class="prompt-box">
+        <div class="prompt-head"><div class="copy-label">여기서부터 복사 <span class="arrow">➡</span></div><button class="copy-btn" data-copy="p1">한 번에 복사</button></div>
+        <pre class="prompt" id="p1">너는 전문 북디자이너이자 AI 이미지 생성 프롬프트 전문가야.
+
+내가 지금 첨부한 이미지는 내가 읽은 책의 표지야.
+이 이미지를 ‘그대로 복제’하는 것이 아니라, 이 책표지가 어떤 디자인 원리로 만들어졌는지 분석하고 비슷한 분위기의 새로운 표지를 만들 수 있는 이미지 생성 프롬프트 구조를 배우고 싶어.
+
+다음 순서로 아주 구체적으로 분석해줘.
+
+1. 전체 디자인 콘셉트와 분위기
+2. 배경의 색상, 질감, 공간감
+3. 가장 눈에 띄는 중심 소재 또는 인물
+4. 인물이나 사물의 위치, 크기, 방향
+5. 구도와 여백
+6. 카메라 앵글 또는 시점
+7. 빛의 방향, 밝기, 그림자
+8. 대표 색상 3~5개와 색상 조합
+9. 그림 스타일 또는 사진 스타일
+10. 제목이 들어갈 위치와 글자 분위기
+11. 독자가 이 표지를 봤을 때 느낄 감정
+12. 비슷한 ‘디자인 원리와 분위기’를 가진 새로운 책표지를 만들 수 있는 한국어 이미지 생성 프롬프트
+
+중요 조건:
+- 원본 표지를 똑같이 복제하지 말고 디자인 특징만 분석해줘.
+- 저자명, 출판사 로고, 기존 제목 등 원본의 고유한 글자와 로고는 그대로 따라 하지 말아줘.
+- 마지막에 이미지 생성 AI에 바로 붙여넣을 수 있는 ‘최종 프롬프트’를 하나의 완성된 문장 묶음으로 작성해줘.
+- 이미지 비율은 세로형 책표지에 어울리는 2:3 비율을 기본으로 해줘.
+- 중학생도 이해할 수 있는 쉬운 말로 설명해줘.</pre>
+        <div class="example"><strong>💡 샘플 사용법</strong><br><code>① 책표지 이미지를 먼저 첨부 → ② 위 프롬프트를 복사 → ③ 그대로 붙여넣기 → ④ AI가 분석한 결과 중 마지막 ‘최종 프롬프트’를 저장</code></div>
+      </div>
+
+      <h3>4단계 실습 프롬프트 · 내 감정으로 책표지 재설계</h3>
+      <div class="prompt-box">
+        <div class="prompt-head"><div class="copy-label">여기서부터 복사 <span class="arrow">➡</span></div><button class="copy-btn" data-copy="p2">한 번에 복사</button></div>
+        <pre class="prompt" id="p2">너는 청소년 독서 콘텐츠를 잘 이해하는 전문 북디자이너이자 이미지 생성 프롬프트 전문가야.
+
+앞에서 분석한 책표지 프롬프트를 참고하되, 이제는 원본을 따라 만드는 것이 아니라 ‘내가 책을 읽고 느낀 생각’을 중심으로 완전히 새로운 책표지를 만들고 싶어.
+
+[내가 입력할 정보]
+- 책 제목: [여기에 입력]
+- 책을 읽고 가장 크게 느낀 감정 3가지: [예: 설렘, 외로움, 용기]
+- 책을 표현하는 핵심 단어 3~5개: [여기에 입력]
+- 가장 기억에 남는 장면: [여기에 입력]
+- 주인공의 모습/나이대/표정/옷차림: [여기에 입력]
+- 표지에서 가장 강조하고 싶은 상징물: [여기에 입력]
+- 내가 원하는 색감: [예: 푸른 밤, 따뜻한 노랑, 초록 숲]
+- 내가 원하는 분위기: [예: 신비롭고 잔잔함]
+- 꼭 넣고 싶은 제목 문구: [여기에 입력 / 없으면 '글자 없이']
+
+요청:
+1. 앞에서 분석한 표지의 장점 중 ‘구도, 여백, 색의 조화, 시선 집중 방식’만 참고해줘.
+2. 원본 표지의 인물·그림·로고·폰트·고유한 디자인을 복제하지 말아줘.
+3. 내가 적은 감정, 단어, 기억에 남는 장면을 중심으로 새로운 시각적 이야기를 만들어줘.
+4. 이미지 속 인물은 책의 분위기를 표현하는 새로운 캐릭터로 설정해줘.
+5. 책표지답게 제목 영역이 잘 보이고, 복잡하지 않으며, 작은 화면에서도 중심 이미지가 잘 보이게 해줘.
+6. 이미지 비율은 세로 2:3.
+7. 마지막 결과는 이미지 생성 AI에 바로 복사할 수 있는 ‘한국어 최종 이미지 생성 프롬프트’ 하나로 정리해줘.
+8. 프롬프트에는 배경, 인물/사물, 구도, 색감, 조명, 감정, 표현 스타일, 카메라 시점, 텍스트 영역을 빠짐없이 넣어줘.
+9. 한글 제목을 넣는 경우 “한글 철자를 정확하게 표현”하라는 조건도 추가해줘.</pre>
+        <div class="example"><strong>💡 샘플 입력</strong><br><code>감정: 외로움·용기·희망 / 핵심단어: 밤길, 별빛, 우정 / 기억장면: 혼자 걷던 주인공이 친구를 만나는 순간 / 색감: 딥블루+따뜻한 노랑 / 분위기: 처음엔 쓸쓸하지만 끝에는 희망적</code></div>
+      </div>
+
+      <div class="checklist">
+        <div class="check">완성 이미지가 내 생각과 감정을 담고 있는가?</div>
+        <div class="check">원본 표지를 그대로 베끼지 않고 새롭게 재해석했는가?</div>
+        <div class="check">프롬프트를 저장했는가?</div>
+      </div>
+    </section>
+
+    <section id="day2" class="section-card">
+      <div class="kicker">DAY 02 · 2026.10.08</div>
+      <h2>둘째 날 · AI와 시를 만들고 시화 이미지 완성</h2>
+      <div class="session-banner"><div class="session-icon">📝</div><div><strong>오늘의 작품: 나의 시 1편 + 시화 이미지 1장</strong><br><span>AI에게 한 번에 “시 써줘”라고 하기보다, 내 경험과 감정을 먼저 꺼내고 함께 고쳐 봅니다.</span></div></div>
+
+      <div class="timeline">
+        <div class="step"><div class="step-no">1</div><div><strong>AI와 시 만들기</strong><br>내 경험·장면·감정을 입력하고 초안을 만든 뒤 대화하면서 표현을 다듬습니다.</div></div>
+        <div class="step"><div class="step-no">2</div><div><strong>시화 프롬프트 만들기</strong><br><a href="https://dandelionmedia.github.io/poem/" target="_blank" rel="noopener noreferrer" style="color:#1667d9;font-weight:900">시화 이미지 생성 메이커 페이지 열기 ↗</a> → 내용을 입력해 이미지 프롬프트를 만듭니다.</div></div>
+        <div class="step"><div class="step-no">3</div><div><strong>시화 이미지 생성</strong><br>완성된 프롬프트를 ChatGPT 또는 Gemini에 붙여넣고 이미지를 생성합니다.</div></div>
+        <div class="step"><div class="step-no">4</div><div><strong>시화 발표회</strong><br>내 시의 한 구절과 이미지에 담긴 의미를 친구들에게 소개합니다.</div></div>
+      </div>
+
+      <h3>1단계 실습 프롬프트 · 내 경험으로 시 만들기</h3>
+      <div class="prompt-box">
+        <div class="prompt-head"><div class="copy-label">여기서부터 복사 <span class="arrow">➡</span></div><button class="copy-btn" data-copy="p3">한 번에 복사</button></div>
+        <pre class="prompt" id="p3">너는 중학생의 생각과 감정을 존중하면서 글쓰기를 도와주는 친절한 시 창작 코치야.
+내가 직접 쓴 것처럼 내 경험과 내 말투가 살아 있는 시를 만들 수 있도록 도와줘.
+
+먼저 나에게 아래 질문을 한 번에 보여줘.
+내가 답하면 그 답을 바탕으로 시 초안을 만들어줘.
+
+[질문]
+1. 오늘 시로 쓰고 싶은 주제는 무엇이야?
+2. 그 주제와 관련해 실제로 기억나는 장소는 어디야?
+3. 그때 함께 있었던 사람 또는 떠오르는 사람은 누구야?
+4. 가장 기억나는 장면 하나는?
+5. 그 순간의 소리, 냄새, 날씨, 색깔 중 기억나는 것은?
+6. 그때 내 기분을 단어 3개로 말하면?
+7. 꼭 넣고 싶은 물건이나 상징 하나는?
+8. 내가 직접 말하고 싶은 한 문장은?
+9. 시의 분위기는 어떤 느낌이면 좋겠어? (따뜻함/유쾌함/쓸쓸함/신비로움/희망적 등)
+10. 시 제목은 내가 정할까, 네가 5개를 추천할까?
+
+내 답을 받은 다음에는:
+- 10~16행 정도의 자유시 초안을 만들어줘.
+- 너무 어려운 단어와 어른스러운 표현은 피하고 중학생이 실제로 쓸 법한 자연스러운 말로 써줘.
+- 흔한 표현보다 내가 말한 구체적인 장면, 냄새, 소리, 색깔을 살려줘.
+- 운율을 억지로 맞추지 말고 읽었을 때 자연스럽게 해줘.
+- 내가 직접 적은 문장이 있다면 가능하면 중요한 위치에 살려줘.
+- 시를 만든 뒤 ‘좋은 점 3가지’와 ‘더 내 글답게 바꿀 수 있는 부분 3가지’를 알려줘.
+- 마지막에 “어떤 부분을 바꾸고 싶어?”라고 물어봐줘.
+- 내가 수정 의견을 주면 전체 시를 다시 보여주되 바뀐 부분이 자연스럽게 이어지게 해줘.</pre>
+        <div class="example"><strong>💡 샘플 답변</strong><br><code>주제: 할머니와 시장 / 장소: 평택 통복시장 / 장면: 할머니가 호떡을 반으로 나눠준 순간 / 소리: 사람들 목소리 / 냄새: 달콤한 호떡 / 감정: 따뜻함, 그리움, 행복 / 상징: 종이봉투</code></div>
+      </div>
+
+      <h3>시를 더 잘 고치는 짧은 프롬프트</h3>
+      <div class="prompt-box">
+        <div class="prompt-head"><div class="copy-label">여기서부터 복사 <span class="arrow">➡</span></div><button class="copy-btn" data-copy="p4">한 번에 복사</button></div>
+        <pre class="prompt" id="p4">지금 만든 시를 내 글처럼 더 자연스럽게 고쳐줘.
+1) 너무 어려운 단어는 쉬운 말로,
+2) 설명하는 문장은 장면이 보이게,
+3) 뻔한 표현은 구체적인 감각 표현으로,
+4) 가장 좋은 한 구절은 더 강하게,
+5) 전체 길이는 너무 길지 않게 다듬어줘.
+그리고 수정 전/후에 무엇이 좋아졌는지도 중학생이 이해하기 쉽게 5줄 이내로 알려줘.</pre>
+        <div class="example"><strong>💡 샘플 요청</strong><br><code>“마지막 두 줄이 너무 평범해. 할머니가 호떡을 나눠준 장면으로 끝나게 바꿔줘.”</code></div>
+      </div>
+    </section>
+
+    <section id="day3" class="section-card">
+      <div class="kicker">DAY 03 · 2026.10.22</div>
+      <h2>셋째 날 · 내가 읽은 책을 AI영상으로 소개하는 북튜브</h2>
+      <div class="session-banner"><div class="session-icon">🎬</div><div><strong>오늘의 작품: 6개 장면으로 만든 북큐레이션 영상</strong><br><span>책의 줄거리를 전부 말하는 영상보다 “왜 이 책을 읽어볼 만한지”가 궁금해지는 영상을 만듭니다.</span></div></div>
+
+      <h3>전체 8단계</h3>
+      <div class="timeline">
+        <div class="step"><div class="step-no">1</div><div><strong>읽은 책 준비</strong><br>책 제목, 저자, 기억나는 장면, 인상 깊은 문장을 메모합니다.</div></div>
+        <div class="step"><div class="step-no">2</div><div><strong>리뷰어 자료 수집</strong><br>책을 소개할 근거와 나의 감상을 정리해 북큐레이션 기획 초안을 만듭니다.</div></div>
+        <div class="step"><div class="step-no">3</div><div><strong>영상 기획서 만들기</strong><br>누구에게, 무엇을, 어떤 분위기로 소개할지 결정합니다.</div></div>
+        <div class="step"><div class="step-no">4</div><div><strong>캐릭터 + 6장면 + 나레이션 생성</strong><br>영상 주제, 로그라인, 캐릭터, 6장면 스토리보드, 장면별 이미지 프롬프트와 나레이션을 만듭니다.</div></div>
+        <div class="step"><div class="step-no">5</div><div><strong>이미지 6장 + 나레이션 저장</strong><br>각 장면 이미지를 다운로드하고 나레이션 대본을 한 번에 복사합니다.</div></div>
+        <div class="step"><div class="step-no">6</div><div><strong>vStory ai 로그인</strong><br>수업에서 안내받은 vStory ai 페이지에 들어가 구글 계정으로 로그인합니다.</div></div>
+        <div class="step"><div class="step-no">7</div><div><strong>영상 생성</strong><br>6개 장면 나레이션을 붙여넣고 이미지 6장을 첨부한 뒤 영상을 생성합니다.</div></div>
+        <div class="step"><div class="step-no">8</div><div><strong>북튜브 시사회</strong><br>완성 영상을 함께 보고, 가장 잘 전달된 점을 서로 이야기합니다.</div></div>
+      </div>
+
+      <h3>2단계 프롬프트 · 북큐레이션 자료 수집</h3>
+      <div class="prompt-box">
+        <div class="prompt-head"><div class="copy-label">여기서부터 복사 <span class="arrow">➡</span></div><button class="copy-btn" data-copy="p5">한 번에 복사</button></div>
+        <pre class="prompt" id="p5">너는 중학생 북튜버의 책 소개를 도와주는 북큐레이션 코치야.
+내가 읽은 책을 다른 친구에게 소개하는 1~2분 정도의 영상을 만들려고 해.
+중요한 것은 책의 줄거리를 전부 요약하는 것이 아니라, 내가 읽고 느낀 점과 ‘왜 이 책을 읽어볼 만한지’를 잘 전달하는 거야.
+
+[책 정보]
+- 책 제목: [입력]
+- 저자: [입력]
+- 책의 장르: [입력]
+- 내가 기억하는 주요 인물: [입력]
+- 가장 기억에 남는 장면: [입력]
+- 가장 인상 깊었던 문장 또는 내용: [입력]
+- 읽고 난 뒤 느낀 감정: [입력]
+- 이 책을 한 단어로 표현하면: [입력]
+- 이 책을 추천하고 싶은 친구: [입력]
+- 추천 이유: [입력]
+
+위 내용을 바탕으로 아래 항목의 ‘북큐레이션 자료 수집표’를 만들어줘.
+
+1. 책을 1문장으로 소개하기
+2. 책의 핵심 주제 3개
+3. 스포일러 없이 설명할 핵심 줄거리 3~5문장
+4. 기억에 남는 인물과 그 이유
+5. 가장 인상 깊은 장면과 그 장면이 중요한 이유
+6. 내가 느낀 감정과 생각
+7. 친구가 이 책을 읽어야 할 이유 3가지
+8. 어떤 친구에게 추천하면 좋은지
+9. 영상 첫 5초에 사용할 궁금증을 만드는 질문/한마디 5개
+10. 영상 마지막 추천 멘트 3개
+11. 영상에서 절대 말하지 않는 것이 좋은 큰 스포일러가 있다면 별도로 표시
+
+중요:
+- 내가 입력하지 않은 책의 사실을 아는 척해서 만들지 말고, 확실하지 않으면 나에게 확인 질문을 해줘.
+- 책의 문장을 길게 그대로 옮기지 말고 필요한 경우 짧게 인용하거나 내 말로 요약하도록 안내해줘.
+- 중학생 친구들이 듣기 편한 짧고 자연스러운 말로 정리해줘.</pre>
+        <div class="example"><strong>💡 샘플 입력</strong><br><code>책: 어린 왕자 / 기억장면: 여우와 친구가 되는 장면 / 감정: 따뜻함과 아쉬움 / 한 단어: 관계 / 추천대상: 친구 때문에 고민하는 사람</code></div>
+      </div>
+
+      <h3>3단계 프롬프트 · 북튜브 영상 기획서</h3>
+      <div class="prompt-box">
+        <div class="prompt-head"><div class="copy-label">여기서부터 복사 <span class="arrow">➡</span></div><button class="copy-btn" data-copy="p6">한 번에 복사</button></div>
+        <pre class="prompt" id="p6">너는 청소년 대상 1~2분 북튜브 영상을 전문적으로 기획하는 콘텐츠 기획자야.
+
+아래에 붙여넣는 ‘북큐레이션 자료 수집표’를 바탕으로 영상 기획서를 만들어줘.
+
+[여기에 앞 단계에서 만든 북큐레이션 자료 수집표 전체를 붙여넣기]
+
+영상 기획서는 다음 항목으로 작성해줘.
+1. 영상 제목 후보 5개
+2. 가장 추천하는 제목 1개와 이유
+3. 영상 주제
+4. 한 문장 로그라인
+5. 주요 시청자
+6. 이 영상을 보고 시청자가 얻게 되는 것
+7. 영상 전체 분위기
+8. 영상 표현 스타일: 따뜻한 애니메이션 스타일
+9. 영상 비율: 16:9
+10. 예상 길이: 60~120초
+11. 시작 5초 훅(Hook)
+12. 중간에 반드시 보여줄 핵심 내용 3가지
+13. 스포일러 없이 호기심을 남기는 방법
+14. 마지막 한마디 또는 추천 CTA
+15. 전체 흐름을 ‘시작 → 호기심 → 책 소개 → 인상 장면 → 나의 감상 → 추천 → 마무리’ 순서로 간단히 정리
+
+조건:
+- 책 내용을 전부 설명하지 말고 읽고 싶게 만들어줘.
+- 사실과 내 감상을 구분해줘.
+- 내가 제공하지 않은 사실은 임의로 만들지 말아줘.
+- 중학생이 직접 발표하거나 나레이션하기 쉬운 말로 작성해줘.</pre>
+        <div class="example"><strong>💡 사용법</strong><br><code>앞 단계에서 나온 ‘북큐레이션 자료 수집표’를 통째로 복사 → [붙여넣기] 영역에 넣기 → 기획서 생성</code></div>
+      </div>
+
+      <h3>4단계 핵심 프롬프트 · 캐릭터 + 6장면 스토리보드 + 이미지 + 나레이션</h3>
+      <div class="source-note"><b>🛡️ 이미지 생성 안전 가이드 반영</b><br>아래 프롬프트는 학생들이 ChatGPT 또는 Google Gemini에서 이미지를 만들 때 생성 정책에 어긋날 가능성을 줄이고, 한 번에 결과가 잘 나오도록 구성했습니다. 실존 인물·유명 캐릭터·기존 책표지 복제는 피하고, 폭력적이거나 민감한 장면은 상징적이고 교육적으로 안전한 장면으로 바꾸도록 지시합니다.</div>
+      <div class="prompt-box">
+        <div class="prompt-head"><div class="copy-label">여기서부터 복사 <span class="arrow">➡</span></div><button class="copy-btn" data-copy="p7">한 번에 복사</button></div>
+        <pre class="prompt" id="p7">너는 전문 북튜브 영상감독, 스토리보드 작가, 애니메이션 캐릭터 디자이너, AI 이미지 생성 프롬프트 전문가야.
+
+아래에 내가 만든 ‘북튜브 영상 기획서’를 붙여넣을게.
+이 기획서를 바탕으로 16:9 애니메이션 스타일의 북튜브 영상을 만들기 위한 모든 제작 자료를 만들어줘.
+
+[여기에 북튜브 영상 기획서 전체를 붙여넣기]
+
+━━━━━━━━━━━━━━━━━━━━
+A. 영상 기본 설정
+━━━━━━━━━━━━━━━━━━━━
+다음 항목을 먼저 정리해줘.
+1. 영상 주제
+2. 영상 제목
+3. 한 문장 로그라인
+4. 전체 예상 길이
+5. 영상의 감정 흐름
+6. 영상의 색감과 전체 애니메이션 스타일
+
+━━━━━━━━━━━━━━━━━━━━
+B. 주인공 캐릭터 설계
+━━━━━━━━━━━━━━━━━━━━
+책을 소개할 주인공 캐릭터는 1명만 기본으로 사용해줘.
+책의 이야기상 정말 필요한 경우에만 최대 2명까지 허용하고, 그 이상은 만들지 마.
+
+캐릭터마다 아래 내용을 정리해줘.
+- 이름 또는 역할
+- 나이대
+- 성별 표현
+- 얼굴 특징
+- 헤어스타일
+- 옷차림
+- 대표 색상
+- 표정과 분위기
+- 책과 연결되는 이유
+
+그리고 캐릭터 이미지 생성 프롬프트를 만들어줘.
+
+[캐릭터 이미지 생성 필수 조건]
+- 얼굴이 정면을 바라본다.
+- 얼굴을 포함한 상반신까지만 보인다.
+- 흰색 배경.
+- 깔끔한 고품질 애니메이션 영화 스타일.
+- 16:9 비율.
+- 자연스럽고 친근한 표정.
+- 캐릭터의 얼굴, 머리, 옷, 색상 특징을 이후 모든 장면에서 동일하게 유지할 수 있도록 아주 구체적으로 묘사.
+- 이미지 안에는 이름표, 로고, 설명 글자 등 불필요한 텍스트를 넣지 않는다.
+- ChatGPT 또는 Google Gemini의 일반적인 이미지 생성 정책에 어긋나지 않도록 안전한 표현으로 작성한다.
+- 실제 학생, 교사, 연예인, 유명인 등 특정 실존 인물의 얼굴을 그대로 복제하거나 닮게 만들지 말고 완전히 새로운 가상 캐릭터로 설계한다.
+- 특정 유명 애니메이션, 영화, 게임, 작가의 고유 캐릭터나 화풍을 그대로 복제하지 말고 ‘따뜻한 고품질 3D/2D 애니메이션 영화풍’처럼 일반적인 시각적 특성으로 표현한다.
+- 선정적 표현, 노출, 혐오, 자해, 과도한 폭력, 피나 상처의 상세 묘사, 위험 행동을 멋있게 보이게 하는 표현은 넣지 않는다.
+- 중학생 교육용 콘텐츠에 적합한 건강하고 밝은 장면으로 설계한다.
+- 이미지 생성 모델이 한 번에 이해하기 쉽도록 ‘주인공 → 외형 → 표정 → 의상 → 배경 → 구도 → 조명 → 스타일 → 비율 → 제외 요소’ 순서로 프롬프트를 작성한다.
+- 불필요하게 추상적인 표현은 줄이고 눈으로 확인할 수 있는 구체적인 시각 요소를 사용한다.
+- 프롬프트 마지막에는 반드시 다음 제외 조건을 한 문장으로 넣는다: “실존 인물 복제 금지, 기존 캐릭터·로고·책표지 복제 금지, 선정성·과도한 폭력·혐오 표현 금지, 불필요한 글자·워터마크·서명 없음.”
+
+출력할 때 반드시 아래 형식을 지켜줘.
+
+여기서부터 복사 ➡
+[캐릭터 이미지 생성 프롬프트 전체]
+
+━━━━━━━━━━━━━━━━━━━━
+C. 정확히 6개 장면의 스토리보드
+━━━━━━━━━━━━━━━━━━━━
+책을 ‘잘 소개하면서도 큰 스포일러는 피하는’ 6개 장면의 스토리라인을 만들어줘.
+
+권장 흐름:
+장면 1. 궁금증을 만드는 시작
+장면 2. 책과 배경/상황 소개
+장면 3. 중요한 인물 또는 갈등 소개
+장면 4. 가장 인상적인 장면 또는 핵심 메시지
+장면 5. 내가 읽고 느낀 감정과 생각
+장면 6. 어떤 친구에게 추천하는지 + 읽어보고 싶게 마무리
+
+각 장면마다 반드시 아래 5개 항목을 만들어줘.
+1. 장면 번호
+2. 장면 제목
+3. 장면 설명
+4. 장면 이미지 생성 프롬프트
+5. 장면 나레이션 대본
+
+[장면 이미지 생성 프롬프트 필수 조건]
+- 모든 장면은 16:9 와이드 비율.
+- 일관된 고품질 애니메이션 영화 스타일.
+- 같은 캐릭터가 다시 등장할 경우 캐릭터의 얼굴, 헤어스타일, 의상, 대표 색상을 동일하게 유지.
+- 캐릭터가 필요 없는 장면에는 억지로 넣지 않아도 됨.
+- 장면의 시간대, 장소, 배경, 인물 행동, 표정, 감정을 구체적으로 작성.
+- 전문 사진/영화 촬영 기법을 장면마다 다양하게 활용:
+  와이드샷, 미디엄샷, 클로즈업, 오버숄더샷, 로우앵글, 하이앵글, 아이레벨, 얕은 심도, 깊은 심도, 자연광, 역광, 골든아워, 부드러운 확산광 등에서 장면에 맞는 것을 선택.
+- 카메라 구도와 피사체 위치도 구체적으로 설명.
+- 시선이 어디로 가야 하는지 명확하게.
+- 이미지 속 글자는 가능한 한 넣지 않는 것을 기본으로 함.
+- 꼭 한글이 필요한 경우에는 “정확한 한글 철자, 오타 없는 한글 타이포그래피”라고 명시하고, 긴 문장 대신 짧은 단어만 사용.
+- 기존 책표지, 출판사 로고, 삽화 등을 그대로 복제하지 말고 영상용으로 새롭게 시각화.
+- 이미지 생성 프롬프트는 반드시 한국어로 작성.
+- 각 장면의 이미지 프롬프트는 다른 설명과 섞이지 않게 별도의 복사 영역처럼 제공.
+- ChatGPT 또는 Google Gemini의 일반적인 이미지 생성 정책에 어긋나지 않도록 교육용으로 안전한 장면과 표현만 사용한다.
+- 실제 학생·교사·유명인 등 실존 인물의 얼굴을 그대로 복제하거나 닮게 만들지 않고, 등장인물은 새롭게 설계한 가상 캐릭터로 표현한다.
+- 특정 유명 애니메이션·게임·영화 캐릭터, 유명 작가의 화풍, 기존 출판물 삽화와 너무 비슷하게 만들지 않는다.
+- 책 속에 위험·폭력·공포 내용이 있더라도 피, 상처, 무기 사용의 상세 표현 대신 상징적이고 비폭력적인 연출로 바꿔 표현한다.
+- 선정성, 노출, 혐오, 자해, 잔혹 묘사, 위험 행동 조장, 차별적 표현은 제외한다.
+- 중학생이 보는 교육 콘텐츠에 맞는 표현 수위를 유지한다.
+- 이미지 생성 모델이 한 번에 이해할 수 있도록 각 프롬프트를 다음 순서로 작성한다:
+  ① 장면 핵심 ② 장소·시간대 ③ 인물/사물 ④ 행동·표정 ⑤ 구도·샷 ⑥ 조명·색감 ⑦ 애니메이션 스타일 ⑧ 16:9 ⑨ 일관성 조건 ⑩ 제외 요소.
+- 장면마다 너무 많은 인물·소품·효과를 넣지 말고 핵심 피사체 1~3개를 중심으로 단순하고 명확하게 구성한다.
+- 한 번에 이미지가 잘 생성되도록 서로 충돌하는 지시(예: 밤인데 강한 한낮 햇빛, 클로즈업인데 전신이 모두 보이게 등)는 사용하지 않는다.
+- 프롬프트 마지막에는 반드시 다음 제외 조건을 넣는다: “실존 인물 복제 금지, 기존 캐릭터·로고·책표지·삽화 복제 금지, 선정성·과도한 폭력·혐오·자해 표현 금지, 불필요한 글자·워터마크·서명 없음.”
+
+각 장면의 이미지 프롬프트 바로 앞에는 반드시 정확히:
+“여기서부터 복사 ➡”
+라고 적어줘.
+
+[나레이션 작성 필수 조건]
+- 각 장면당 약 2~4문장.
+- 중학생이 직접 말해도 자연스러운 쉬운 한국어.
+- 전체를 이어 읽었을 때 하나의 이야기처럼 연결.
+- 책의 결말이나 큰 반전을 직접 말하지 않음.
+- 사실을 꾸며내지 않음.
+- 장면 번호를 나레이션 앞에 반드시 표시.
+
+각 장면의 나레이션 앞에는:
+“장면 1 나레이션”, “장면 2 나레이션”처럼 번호를 넣고,
+그 아래에 “여기서부터 복사 ➡”를 적어줘.
+
+━━━━━━━━━━━━━━━━━━━━
+D. 나레이션 전체 복사용 대본
+━━━━━━━━━━━━━━━━━━━━
+6개 장면을 모두 만든 뒤 맨 마지막에,
+장면 1~6의 나레이션만 순서대로 하나로 합쳐서
+“전체 나레이션 한 번에 복사” 영역을 만들어줘.
+
+형식:
+전체 나레이션 한 번에 복사
+여기서부터 복사 ➡
+[장면 1~6 나레이션 전체]
+
+━━━━━━━━━━━━━━━━━━━━
+E. 마지막 점검표
+━━━━━━━━━━━━━━━━━━━━
+마지막에 아래를 체크해줘.
+- [ ] 장면은 정확히 6개인가?
+- [ ] 모든 장면이 16:9인가?
+- [ ] 애니메이션 스타일이 일관적인가?
+- [ ] 같은 캐릭터의 외형이 장면마다 일관적인가?
+- [ ] 모든 이미지 프롬프트가 한국어인가?
+- [ ] 각 프롬프트 앞에 ‘여기서부터 복사 ➡’가 있는가?
+- [ ] 각 장면에 나레이션이 있는가?
+- [ ] 스포일러를 과하게 말하지 않았는가?
+- [ ] 책을 읽어보고 싶은 궁금증이 남는가?
+- [ ] 내가 제공하지 않은 사실을 임의로 만들지 않았는가?\n- [ ] 정책상 안전하지 않은 표현을 제거했는가?\n- [ ] 기존 캐릭터·실존 인물·책표지를 그대로 복제하지 않았는가?\n- [ ] 이미지 생성 지시가 서로 충돌하지 않고 한 번에 이해하기 쉬운가?
+
+━━━━━━━━━━━━━━━━━━━━
+F. 이미지 생성 성공률을 높이는 최종 정리 규칙
+━━━━━━━━━━━━━━━━━━━━
+캐릭터와 6개 장면의 이미지 생성 프롬프트를 모두 만든 뒤, 각 프롬프트를 다시 한 번 점검해줘.
+
+점검 기준:
+1. 정책상 문제가 될 수 있는 실존 인물 복제, 유명 캐릭터 복제, 선정성, 잔혹한 폭력, 혐오, 자해 표현이 없는가?
+2. 저작권이 있는 기존 책표지·로고·삽화를 그대로 따라 하라는 지시가 없는가?
+3. 한 프롬프트 안의 장면, 인물 수, 행동, 카메라 지시가 서로 충돌하지 않는가?
+4. 이미지에서 가장 중요한 피사체가 무엇인지 한눈에 이해되는가?
+5. 캐릭터의 외모와 의상이 6개 장면 전체에서 유지될 수 있도록 동일한 핵심 묘사가 반복되는가?
+6. 불필요한 글자 생성 요청을 최소화했는가?
+7. 장면마다 장소, 시간대, 인물 행동, 표정, 카메라 샷, 조명, 색감, 스타일, 비율이 빠짐없이 들어 있는가?
+8. 중학생 교육용 콘텐츠로 안전하고 자연스러운가?
+
+문제가 있으면 스스로 안전하고 명확한 표현으로 수정한 뒤 최종 프롬프트만 출력해줘.
+정책상 생성이 어려울 수 있는 장면은 거절을 유도하는 표현을 그대로 두지 말고, 교육 목적과 이야기의 의미를 유지하면서 ‘상징적 장면, 비폭력적 연출, 실루엣, 표정 중심, 사물 중심’ 등 안전한 대체 장면으로 바꿔줘.
+
+중요:
+결과를 생략하지 말고 A부터 F까지 전부 작성해줘.</pre>
+        <div class="example"><strong>💡 샘플 사용법</strong><br><code>① 3단계에서 만든 영상 기획서를 통째로 복사 → ② 위 프롬프트의 [붙여넣기] 위치에 넣기 → ③ AI에게 전송 → ④ 캐릭터 프롬프트부터 순서대로 이미지 생성</code></div>
+      </div>
+
+      <h3>영상 제작 전 마지막 확인</h3>
+      <div class="checklist">
+        <div class="check">캐릭터 기준 이미지 1장을 먼저 만들고 외형을 확인했는가?</div>
+        <div class="check">스토리보드 장면이 정확히 6개인가?</div>
+        <div class="check">모든 장면 이미지가 16:9인가?</div>
+        <div class="check">장면 1~6 나레이션을 순서대로 저장했는가?</div>
+        <div class="check">책의 큰 반전이나 결말을 스포일러하지 않았는가?</div>
+        <div class="check">6개 이미지 파일 이름을 01~06 순서로 정리했는가?</div>
+      </div>
+      <div class="tip"><b>파일 이름 팁</b><br>01_hook.png · 02_book.png · 03_character.png · 04_message.png · 05_review.png · 06_recommend.png 처럼 저장하면 영상 만들 때 순서가 헷갈리지 않습니다.</div>
+    </section>
+
+    <section id="teacher" class="section-card">
+      <div class="kicker">INSTRUCTOR</div>
+      <h2>오늘 함께 만드는 사람 · 김유성 강사</h2>
+      <div class="teacher-wrap">
+        <div class="teacher-card">
+          <div class="goldbar"></div>
+          <div class="teacher-head">
+            <table><tr>
+              <td style="padding-right:14px"><img class="profile" src="https://cdn.imweb.me/upload/S2017031458c7abc782f2d/4df5f3608cf4e.jpg" alt="김유성 강사" loading="lazy"></td>
+              <td>
+                <div style="color:#ffe39a;font-size:13px;font-weight:bold">AI콘텐츠마케팅연구소</div>
+                <div style="color:#fff;font-size:27px;font-weight:bold">유쌤클래스</div>
+                <div style="margin-top:5px;padding-top:5px;border-top:1px solid #7184a9;color:#fff;font-size:15px"><b>대표 · 강사 김유성</b><br><span style="color:#d9e0ed;font-size:12px">Kim Yu Seong</span></div>
+              </td>
+            </tr></table>
+          </div>
+          <div class="teacher-body">
+            <div class="teacher-area"><b style="color:#102653;font-size:14px">교육분야</b><br>AI인공지능 · 콘텐츠제작 · 온라인마케팅 · 미디어 리터러시 · 퍼스널브랜딩 · 책출판 · 미디어창작 · 브랜드컨설팅</div>
+            <div class="teacher-area blue"><b style="color:#102653;font-size:14px">교육대상</b><br>정부·지자체·공공기관 임직원 · 공무원 · 교사 · 청소년 · 중소기업 임직원 · 신입사원 · 취업준비생 · 1인기업인</div>
+          </div>
+          <div class="teacher-contact"><b style="color:#102653;font-size:14px">강의 및 협업 문의</b><br>
+            <a href="tel:01027819669" style="text-decoration:none">010-2781-9669</a> ·
+            <a href="tel:050713119669" style="text-decoration:none">0507-1311-9669</a><br>
+            <a href="mailto:kyseong3@naver.com" style="text-decoration:none">kyseong3@naver.com</a> ·
+            <a href="https://www.yussamclass.com" style="color:#876319;text-decoration:none" target="_blank" rel="noopener noreferrer">www.yussamclass.com</a>
+          </div>
+          <div class="teacher-social">
+            <div style="margin-bottom:7px;color:#102653;font-size:13px;font-weight:bold">SNS 채널</div>
+            <a href="https://www.yussamclass.com" target="_blank" rel="noopener noreferrer"><img src="https://cdn.imweb.me/upload/S2017031458c7abc782f2d/db109298c1c0e.png" alt="홈페이지" loading="lazy"></a>
+            <a href="https://blog.naver.com/mindlemedia" target="_blank" rel="noopener noreferrer"><img src="https://cdn.imweb.me/upload/S2017031458c7abc782f2d/e38ab291f5b3d.png" alt="블로그" loading="lazy"></a>
+            <a href="https://www.youtube.com/c/kyseong3" target="_blank" rel="noopener noreferrer"><img src="https://cdn.imweb.me/upload/S2017031458c7abc782f2d/7716e23aacee7.png" alt="유튜브" loading="lazy"></a>
+            <a href="https://www.instagram.com/yussamclass" target="_blank" rel="noopener noreferrer"><img src="https://cdn.imweb.me/upload/S2017031458c7abc782f2d/39127e5032943.png" alt="인스타그램" loading="lazy"></a>
+            <a href="https://www.facebook.com/dandelionmedia1004" target="_blank" rel="noopener noreferrer"><img src="https://cdn.imweb.me/upload/S2017031458c7abc782f2d/47d6af62e63d6.png" alt="페이스북" loading="lazy"></a>
+            <a href="https://www.threads.com/@yussamclass" target="_blank" rel="noopener noreferrer"><img src="https://cdn.imweb.me/upload/S2017031458c7abc782f2d/51b3b1e1118b8.png" alt="스레드" loading="lazy"></a>
+            <a href="https://open.kakao.com/o/gLAE28ui" target="_blank" rel="noopener noreferrer"><img src="https://cdn.imweb.me/upload/S2017031458c7abc782f2d/ee583ebc6add0.png" alt="카카오 오픈채팅" loading="lazy"></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="rules" class="section-card">
+      <div class="kicker">AI SMART RULES</div>
+      <h2>AI를 잘 쓰는 학생의 6가지 약속</h2>
+      <div class="grid2">
+        <div class="mini-card"><strong>① AI의 답을 그대로 믿지 않기</strong><p>책 정보, 저자, 사실은 책과 믿을 수 있는 자료에서 다시 확인합니다.</p></div>
+        <div class="mini-card"><strong>② 내 생각을 먼저 넣기</strong><p>AI에게 전부 맡기기보다 내가 느낀 감정·장면·이유를 먼저 입력합니다.</p></div>
+        <div class="mini-card"><strong>③ 개인정보 넣지 않기</strong><p>주소, 전화번호, 비밀번호, 친구의 민감한 정보는 프롬프트에 입력하지 않습니다.</p></div>
+        <div class="mini-card"><strong>④ 저작권 존중하기</strong><p>책표지나 삽화를 그대로 복제해 내 작품처럼 사용하지 않고, 수업에서는 분석 후 새롭게 재해석합니다.</p></div>
+        <div class="mini-card"><strong>⑤ 친구의 얼굴은 허락받기</strong><p>친구 사진이나 목소리를 AI에 넣을 때는 반드시 본인의 동의를 받습니다.</p></div>
+        <div class="mini-card"><strong>⑥ 마지막 선택은 내가 하기</strong><p>AI가 여러 아이디어를 주더라도 어떤 표현을 쓸지 결정하고 책임지는 사람은 나입니다.</p></div>
+      </div>
+      <div class="tip safety"><b>중요</b> · “AI가 만들었다”보다 “내가 어떤 생각으로 AI를 사용했는가”를 설명할 수 있으면 훨씬 좋은 작품입니다.</div>
+    </section>
+  </main>
+</div>
+
+<footer class="footer">
+  <strong>평택 세교중학교 AI활용 콘텐츠창작 · 내가 만드는 북튜브</strong><br>
+  경기도교육청평택도서관 X AI콘텐츠마케팅연구소 유쌤클래스<br>
+  <span style="font-size:12px;opacity:.75">AI 기술 현황 참고: Stanford HAI 2026 AI Index · Google DeepMind AGI Levels framework</span>
+</footer>
+
+<button class="top-btn" id="topBtn" aria-label="맨위로 이동">↑<br><span style="font-size:11px">맨위</span></button>
+<div class="toast" id="toast" role="status" aria-live="polite">프롬프트를 복사했어요! 📋</div>
+
+<script>
+(function(){
+  const progress=document.getElementById('progress');
+  const topBtn=document.getElementById('topBtn');
+  const toast=document.getElementById('toast');
+  const sections=[...document.querySelectorAll('main section[id]')];
+  const tocLinks=[...document.querySelectorAll('.toc a')];
+
+  function onScroll(){
+    const doc=document.documentElement;
+    const max=doc.scrollHeight-doc.clientHeight;
+    progress.style.width=(max>0 ? (doc.scrollTop/max)*100 : 0)+'%';
+    topBtn.classList.toggle('show', window.scrollY>500);
+    let current='';
+    sections.forEach(s=>{ if(window.scrollY >= s.offsetTop-140) current=s.id; });
+    tocLinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+current));
+  }
+  window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+
+  topBtn.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+  document.querySelectorAll('.copy-btn').forEach(btn=>{
+    btn.addEventListener('click',async()=>{
+      const id=btn.dataset.copy;
+      const text=document.getElementById(id).innerText.trim();
+      try{
+        await navigator.clipboard.writeText(text);
+      }catch(e){
+        const ta=document.createElement('textarea');
+        ta.value=text; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove();
+      }
+      const old=btn.textContent; btn.textContent='복사 완료 ✓'; btn.classList.add('copied');
+      toast.classList.add('show');
+      setTimeout(()=>{toast.classList.remove('show');btn.textContent=old;btn.classList.remove('copied')},1600);
+    });
+  });
+
+  const mobileBtn=document.getElementById('mobileTocBtn');
+  const mobileMenu=document.getElementById('mobileMenu');
+  mobileBtn.addEventListener('click',()=>{
+    const open=mobileMenu.classList.toggle('open');
+    mobileBtn.setAttribute('aria-expanded',open?'true':'false');
+    mobileBtn.querySelector('span').textContent=open?'▲':'▼';
+  });
+  mobileMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+    mobileMenu.classList.remove('open');mobileBtn.setAttribute('aria-expanded','false');mobileBtn.querySelector('span').textContent='▼';
+  }));
+})();
+</script>
+</body>
+</html>
