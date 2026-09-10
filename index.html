@@ -86,8 +86,8 @@
   .mini-card strong{display:block;font-size:18px;color:var(--navy)}
   .date{font-weight:900;color:var(--blue);font-size:14px;margin-top:4px}
   .timeline{display:grid;gap:13px;margin-top:16px}
-  .step{display:grid;grid-template-columns:52px 1fr;gap:14px;align-items:start;padding:17px;border:1px solid var(--line);border-radius:16px;background:#fbfdff}
-  .step-no{width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,var(--blue),var(--cyan));color:#fff;display:grid;place-items:center;font-weight:950}
+  .step{display:grid;grid-template-columns:76px 1fr;gap:14px;align-items:start;padding:17px;border:1px solid var(--line);border-radius:16px;background:#fbfdff}
+  .step-no{width:68px;height:44px;padding:0 8px;border-radius:14px;background:linear-gradient(135deg,var(--blue),var(--cyan));color:#fff;display:grid;place-items:center;font-weight:950;font-size:15px;white-space:nowrap;letter-spacing:-.03em}
   .step strong{font-size:17px;color:var(--navy)}
   .tag{display:inline-flex;padding:5px 9px;border-radius:999px;font-size:12px;font-weight:900;background:#eef5ff;color:var(--blue);margin:3px 4px 3px 0}
   .tip{border-left:5px solid var(--yellow);background:#fffbea;border-radius:12px;padding:14px 16px;margin:15px 0;color:#5b4a0a}
@@ -174,7 +174,7 @@
     .section-card{border-radius:19px;padding:20px}
     .grid2{grid-template-columns:1fr}
     .ai-levels{grid-template-columns:1fr}
-    .step{grid-template-columns:42px 1fr;padding:14px;gap:10px}.step-no{width:38px;height:38px}
+    .step{grid-template-columns:68px 1fr;padding:14px;gap:10px}.step-no{width:62px;height:38px;font-size:13px;padding:0 6px}
     .prompt-head{align-items:flex-start}.copy-label{font-size:13px}.copy-btn{padding:9px 11px;font-size:13px}
     pre.prompt{font-size:14px;padding:15px;line-height:1.75}
     table{display:block;overflow-x:auto;white-space:normal}
@@ -279,11 +279,11 @@
 
       <h3>실습 순서</h3>
       <div class="timeline">
-        <div class="step"><div class="step-no">1</div><div><strong>책 표지 이미지 준비</strong><br>내가 읽은 책을 검색해 표지를 저장합니다. 수업 분석용으로만 활용하고, 완성물을 공개할 때는 원본을 그대로 복제하지 않습니다.</div></div>
-        <div class="step"><div class="step-no">2</div><div><strong>표지 속 ‘디자인 비밀’ 발견하기</strong><br>책 표지를 ChatGPT 또는 Gemini에 첨부하고, 비슷한 분위기를 만드는 데 필요한 디자인 요소와 프롬프트 구조를 분석합니다.</div></div>
-        <div class="step"><div class="step-no">3</div><div><strong>분석 프롬프트 저장</strong><br>AI가 알려준 프롬프트를 메모장 또는 수업 문서에 저장합니다.</div></div>
-        <div class="step"><div class="step-no">4</div><div><strong>내 느낌으로 다시 설계</strong><br>책을 읽고 느낀 감정·단어·장면·주인공의 모습을 넣어 ‘나만의 표지’ 프롬프트로 바꿉니다.</div></div>
-        <div class="step"><div class="step-no">5</div><div><strong>이미지 생성 + 비교</strong><br>최종 프롬프트로 이미지를 만들고, 원래 표지와 무엇이 달라졌는지 이야기합니다.</div></div>
+        <div class="step"><div class="step-no">1단계</div><div><strong>책 표지 이미지 준비</strong><br>내가 읽은 책을 검색해 표지를 저장합니다. 수업 분석용으로만 활용하고, 완성물을 공개할 때는 원본을 그대로 복제하지 않습니다.</div></div>
+        <div class="step"><div class="step-no">2단계</div><div><strong>표지 속 ‘디자인 비밀’ 발견하기</strong><br>책 표지를 ChatGPT 또는 Gemini에 첨부하고, 비슷한 분위기를 만드는 데 필요한 디자인 요소와 프롬프트 구조를 분석합니다.</div></div>
+        <div class="step"><div class="step-no">3단계</div><div><strong>분석 프롬프트 저장</strong><br>AI가 알려준 프롬프트를 메모장 또는 수업 문서에 저장합니다.</div></div>
+        <div class="step"><div class="step-no">4단계</div><div><strong>내 느낌으로 다시 설계</strong><br>책을 읽고 느낀 감정·단어·장면·주인공의 모습을 넣어 ‘나만의 표지’ 프롬프트로 바꿉니다.</div></div>
+        <div class="step"><div class="step-no">5단계</div><div><strong>이미지 생성 + 비교</strong><br>최종 프롬프트로 이미지를 만들고, 원래 표지와 무엇이 달라졌는지 이야기합니다.</div></div>
       </div>
 
       <h3>2단계 실습 프롬프트 · 책표지 디자인 분석</h3>
@@ -362,10 +362,10 @@
       <div class="session-banner"><div class="session-icon">📝</div><div><strong>오늘의 작품: 나의 시 1편 + 시화 이미지 1장</strong><br><span>AI에게 한 번에 “시 써줘”라고 하기보다, 내 경험과 감정을 먼저 꺼내고 함께 고쳐 봅니다.</span></div></div>
 
       <div class="timeline">
-        <div class="step"><div class="step-no">1</div><div><strong>AI와 시 만들기</strong><br>내 경험·장면·감정을 입력하고 초안을 만든 뒤 대화하면서 표현을 다듬습니다.</div></div>
-        <div class="step"><div class="step-no">2</div><div><strong>시화 프롬프트 만들기</strong><br><a href="https://dandelionmedia.github.io/poem/" target="_blank" rel="noopener noreferrer" style="color:#1667d9;font-weight:900">시화 이미지 생성 메이커 페이지 열기 ↗</a> → 내용을 입력해 이미지 프롬프트를 만듭니다.</div></div>
-        <div class="step"><div class="step-no">3</div><div><strong>시화 이미지 생성</strong><br>완성된 프롬프트를 ChatGPT 또는 Gemini에 붙여넣고 이미지를 생성합니다.</div></div>
-        <div class="step"><div class="step-no">4</div><div><strong>시화 발표회</strong><br>내 시의 한 구절과 이미지에 담긴 의미를 친구들에게 소개합니다.</div></div>
+        <div class="step"><div class="step-no">1단계</div><div><strong>AI와 시 만들기</strong><br>내 경험·장면·감정을 입력하고 초안을 만든 뒤 대화하면서 표현을 다듬습니다.</div></div>
+        <div class="step"><div class="step-no">2단계</div><div><strong>시화 프롬프트 만들기</strong><br><a href="https://dandelionmedia.github.io/poem/" target="_blank" rel="noopener noreferrer" style="color:#1667d9;font-weight:900">시화 이미지 생성 메이커 페이지 열기 ↗</a> → 내용을 입력해 이미지 프롬프트를 만듭니다.</div></div>
+        <div class="step"><div class="step-no">3단계</div><div><strong>시화 이미지 생성</strong><br>완성된 프롬프트를 ChatGPT 또는 Gemini에 붙여넣고 이미지를 생성합니다.</div></div>
+        <div class="step"><div class="step-no">4단계</div><div><strong>시화 발표회</strong><br>내 시의 한 구절과 이미지에 담긴 의미를 친구들에게 소개합니다.</div></div>
       </div>
 
       <h3>1단계 실습 프롬프트 · 내 경험으로 시 만들기</h3>
@@ -422,14 +422,14 @@
 
       <h3>전체 8단계</h3>
       <div class="timeline">
-        <div class="step"><div class="step-no">1</div><div><strong>읽은 책 준비</strong><br>책 제목, 저자, 기억나는 장면, 인상 깊은 문장을 메모합니다.</div></div>
-        <div class="step"><div class="step-no">2</div><div><strong>리뷰어 자료 수집</strong><br>책을 소개할 근거와 나의 감상을 정리해 북큐레이션 기획 초안을 만듭니다.</div></div>
-        <div class="step"><div class="step-no">3</div><div><strong>영상 기획서 만들기</strong><br>누구에게, 무엇을, 어떤 분위기로 소개할지 결정합니다.</div></div>
-        <div class="step"><div class="step-no">4</div><div><strong>캐릭터 + 6장면 + 나레이션 생성</strong><br>영상 주제, 로그라인, 캐릭터, 6장면 스토리보드, 장면별 이미지 프롬프트와 나레이션을 만듭니다.</div></div>
-        <div class="step"><div class="step-no">5</div><div><strong>이미지 6장 + 나레이션 저장</strong><br>각 장면 이미지를 다운로드하고 나레이션 대본을 한 번에 복사합니다.</div></div>
-        <div class="step"><div class="step-no">6</div><div><strong>vStory ai 로그인</strong><br>수업에서 안내받은 vStory ai 페이지에 들어가 구글 계정으로 로그인합니다.</div></div>
-        <div class="step"><div class="step-no">7</div><div><strong>영상 생성</strong><br>6개 장면 나레이션을 붙여넣고 이미지 6장을 첨부한 뒤 영상을 생성합니다.</div></div>
-        <div class="step"><div class="step-no">8</div><div><strong>북튜브 시사회</strong><br>완성 영상을 함께 보고, 가장 잘 전달된 점을 서로 이야기합니다.</div></div>
+        <div class="step"><div class="step-no">1단계</div><div><strong>읽은 책 준비</strong><br>책 제목, 저자, 기억나는 장면, 인상 깊은 문장을 메모합니다.</div></div>
+        <div class="step"><div class="step-no">2단계</div><div><strong>리뷰어 자료 수집</strong><br>책을 소개할 근거와 나의 감상을 정리해 북큐레이션 기획 초안을 만듭니다.</div></div>
+        <div class="step"><div class="step-no">3단계</div><div><strong>영상 기획서 만들기</strong><br>누구에게, 무엇을, 어떤 분위기로 소개할지 결정합니다.</div></div>
+        <div class="step"><div class="step-no">4단계</div><div><strong>캐릭터 + 6장면 + 나레이션 생성</strong><br>영상 주제, 로그라인, 캐릭터, 6장면 스토리보드, 장면별 이미지 프롬프트와 나레이션을 만듭니다.</div></div>
+        <div class="step"><div class="step-no">5단계</div><div><strong>이미지 6장 + 나레이션 저장</strong><br>각 장면 이미지를 다운로드하고 나레이션 대본을 한 번에 복사합니다.</div></div>
+        <div class="step"><div class="step-no">6단계</div><div><strong>vStory ai 로그인</strong><br>수업에서 안내받은 vStory ai 페이지에 들어가 구글 계정으로 로그인합니다.</div></div>
+        <div class="step"><div class="step-no">7단계</div><div><strong>영상 생성</strong><br>6개 장면 나레이션을 붙여넣고 이미지 6장을 첨부한 뒤 영상을 생성합니다.</div></div>
+        <div class="step"><div class="step-no">8단계</div><div><strong>북튜브 시사회</strong><br>완성 영상을 함께 보고, 가장 잘 전달된 점을 서로 이야기합니다.</div></div>
       </div>
 
       <h3>2단계 프롬프트 · 북큐레이션 자료 수집</h3>
